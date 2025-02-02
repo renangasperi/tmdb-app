@@ -6,23 +6,11 @@
       {{ titleByMovieType[movieType] }}
     </h1>
     <div class="w-full flex flex-wrap justify-center gap-5">
-      <div
+      <MovieCard
         v-for="movie in movieData?.results"
-        class="relative w-40 h-fit cursor-pointer hover:brightness-75 hover:scale-95 transition-all"
         :key="movie.id"
-        @click="$router.push(`/detail/${movie.id}`)"
-      >
-        <ImageWithLoader
-          className="h-60 object-cover rounded-xl"
-          :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
-          :alt="movie.title"
-        />
-        <p class="mt-3 text-lg font-semibold">{{ movie.title }}</p>
-
-        <div class="absolute right-2 top-[226px]">
-          <VoteBadge :vote-average="movie.vote_average" />
-        </div>
-      </div>
+        :movie="movie"
+      />
     </div>
 
     <button
@@ -41,12 +29,11 @@
 
 <script setup lang="ts">
 import { onMounted } from "vue";
-import { useMovies } from "../composables/useMovies";
 import { useRoute } from "vue-router";
-import ImageWithLoader from "../components/common/ImageWithLoader.vue";
-import VoteBadge from "../components/common/VoteBadge.vue";
-import type { MovieType } from "../types/movie.interface";
+import MovieCard from "../components/common/MovieCard.vue";
+import { useMovies } from "../composables/useMovies";
 import { titleByMovieType } from "../constants/titleByMovieType";
+import type { MovieType } from "../types/movie.interface";
 
 const { path } = useRoute();
 const movieType = path.slice(1) as MovieType;

@@ -2,9 +2,12 @@
   <div
     class="w-full flex flex-col gap-5 px-5 md:px-20 lg:px-36 xl:px-44 2xl:px-80 py-10"
   >
-    <div class="flex gap-10" v-if="movieDetail">
+    <div
+      class="flex flex-col md:flex-row gap-10 items-center md:items-start"
+      v-if="movieDetail"
+    >
       <ImageWithLoader
-        className="w-[300px] h-[450px] rounded-xl"
+        className="w-[300px] h-[450px] w-fuoll rounded-xl"
         :src="`https://image.tmdb.org/t/p/w300${movieDetail?.poster_path}`"
         :alt="movieDetail?.title"
       />
@@ -35,21 +38,11 @@
     </div>
 
     <ScrollableList v-if="movieCredits">
-      <div
+      <CastCard
         v-for="castMember in movieCredits?.cast"
-        class="relative w-40 h-fit max-h-[330px] overflow-hidden select-none hover:brightness-75 hover:scale-95 transition-all"
+        :castMember="castMember"
         :key="castMember.cast_id"
-      >
-        <ImageWithLoader
-          className="h-60 object-cover rounded-xl"
-          :src="`https://image.tmdb.org/t/p/w200${castMember.profile_path}`"
-          :alt="castMember.name"
-        />
-        <p class="mt-3 text-lg font-semibold">{{ castMember.name }}</p>
-        <p class="mt-1 text-sm text-gray-500 line-clamp-1">
-          {{ castMember.character }}
-        </p>
-      </div>
+      />
     </ScrollableList>
   </div>
 </template>
@@ -62,6 +55,7 @@ import { useMovies } from "../composables/useMovies";
 import ImageWithLoader from "../components/common/ImageWithLoader.vue";
 import VoteBadge from "../components/common/VoteBadge.vue";
 import ScrollableList from "../components/Home/ScrollableList.vue";
+import CastCard from "../components/MovieDetail/CastCard.vue";
 
 const router = useRouter();
 const { movieDetail, getMovieById } = useMovies();

@@ -11,35 +11,34 @@
       </button>
     </div>
 
-    <ScrollableList v-if="movieData">
-      <div
+    <ScrollableList v-if="!!movieData">
+      <MovieCard
         v-for="movie in movieData?.results"
-        class="relative w-40 h-fit cursor-pointer hover:brightness-75 hover:scale-95 transition-all max-h-[330px] overflow-hidden"
+        :movie="movie"
         :key="movie.id"
-        :title="movie.title"
-        @click="$router.push(`/detail/${movie.id}`)"
-      >
-        <ImageWithLoader
-          className="h-60 object-cover rounded-xl"
-          :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
-          :alt="movie.title"
-        />
-        <p class="mt-3 text-lg font-semibold line-clamp-2">{{ movie.title }}</p>
-        <p class="mt-1 text-sm text-gray-500 line-clamp-1">
-          {{ movie.release_date }}
-        </p>
-
-        <div class="absolute right-2 top-[226px]">
-          <VoteBadge :vote-average="movie.vote_average" />
-        </div>
-      </div>
+      />
 
       <div
         class="w-40 h-60 relative rounded-xl flex items-center justify-center cursor-pointer text-black/60 hover:text-black hover:bg-gray-200 transition-all"
+        @click="$router.push(movieType)"
       >
         <p class="text-xl font-medium text-center">Ir para a categoria</p>
       </div>
     </ScrollableList>
+
+    <ScrollableList v-if="!!loading">
+      <div
+        class="w-40 h-60 bg-gray-400/60 rounded-xl animate-pulse"
+        v-for="n in 10"
+        :key="n"
+      />
+    </ScrollableList>
+
+    <div v-if="!movieData && !loading">
+      <p class="text-lg font-medium text-gray-500">
+        Não foi possível carregar os filmes
+      </p>
+    </div>
   </div>
 </template>
 
@@ -47,8 +46,7 @@
 import { onMounted } from "vue";
 import { useMovies } from "../../composables/useMovies";
 import type { MovieType } from "../../types/movie.interface";
-import ImageWithLoader from "../common/ImageWithLoader.vue";
-import VoteBadge from "../common/VoteBadge.vue";
+import MovieCard from "../common/MovieCard.vue";
 import ScrollableList from "./ScrollableList.vue";
 
 const { movieType, title } = defineProps<{
@@ -56,7 +54,7 @@ const { movieType, title } = defineProps<{
   title: string;
 }>();
 
-const { movieData, getMovies } = useMovies();
+const { movieData, getMovies, loading } = useMovies();
 
 onMounted(() => {
   getMovies(1, movieType);

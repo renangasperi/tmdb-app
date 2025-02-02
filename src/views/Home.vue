@@ -19,5 +19,3 @@ const movieTypes: Array<keyof typeof titleByMovieType> = [
   "upcoming",
 ];
 </script>
-
-<style scoped></style>

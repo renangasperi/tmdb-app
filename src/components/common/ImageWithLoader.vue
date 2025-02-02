@@ -2,7 +2,7 @@
   <div
     v-if="isLoading"
     :class="className"
-    class="flex items-center justify-center bg-gray-300"
+    class="flex items-center justify-center bg-gray-300 w-full"
   >
     <img src="../../assets/loader.svg" class="animate-spin" />
   </div>

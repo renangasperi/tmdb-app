@@ -82,10 +82,10 @@ onMounted(() => {
   list.addEventListener("mouseleave", onMouseLeave);
   list.addEventListener("mouseup", onMouseUp);
   list.addEventListener("mousemove", onMouseMove);
-  list.addEventListener("touchstart", onTouchStart);
-  list.addEventListener("touchmove", onTouchMove);
-  list.addEventListener("touchend", onTouchEnd);
-  list.addEventListener("touchcancel", onTouchEnd);
+  list.addEventListener("touchstart", onTouchStart, { passive: true });
+  list.addEventListener("touchmove", onTouchMove, { passive: true });
+  list.addEventListener("touchend", onTouchEnd, { passive: true });
+  list.addEventListener("touchcancel", onTouchEnd, { passive: true });
   list.addEventListener("click", onClick, true);
   list.addEventListener("dragstart", (e) => e.preventDefault());
 });

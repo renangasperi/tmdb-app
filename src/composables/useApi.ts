@@ -1,6 +1,5 @@
-// import { useToast } from "vue-toastification";
-
 import { ref } from "vue";
+import { useToast } from "vue-toast-notification";
 
 type Params = Record<string, string>;
 
@@ -23,7 +22,7 @@ export function useApi<T>() {
   const data = ref<T | null>(null);
   const error = ref<Error | null>(null);
   const loading = ref(false);
-  //   const toast = useToast();
+  const $toast = useToast();
 
   const get = async (url: string, params?: Params): Promise<T | null> => {
     loading.value = true;
@@ -46,9 +45,11 @@ export function useApi<T>() {
 
       return responseData;
     } catch (err) {
-      //   toast.error("Falha ao realizar a requisição.", {
-      //     timeout: 2000,
-      //   });
+      $toast.open({
+        message: "Falha ao realizar a requisição.",
+        type: "error",
+        duration: 2000,
+      });
       return null;
     } finally {
       loading.value = false;
