@@ -1,22 +1,23 @@
 <template>
-  <div class="home">
-    <h1>Welcome to the Home Page</h1>
+  <div class="w-full flex flex-col gap-5 px-5 md:px-20 lg:px-36 py-10">
+    <List
+      v-for="movie in movieTypes"
+      :movieType="movie"
+      :title="titleByMovieType[movie]"
+    />
   </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
+import List from "../components/Home/List.vue";
+import { titleByMovieType } from "../constants/titleByMovieType";
 
-const message = ref("Hello, Vue 3!");
-
-function greet() {
-  console.log(message.value);
-}
+const movieTypes: Array<keyof typeof titleByMovieType> = [
+  "now_playing",
+  "popular",
+  "top_rated",
+  "upcoming",
+];
 </script>
 
-<style scoped>
-.home {
-  text-align: center;
-  margin-top: 50px;
-}
-</style>
+<style scoped></style>
