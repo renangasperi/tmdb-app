@@ -5,8 +5,7 @@ type Params = Record<string, string>;
 
 const BASE_URL = "https://api.themoviedb.org/3/";
 
-const apiKey =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZDk5NWY5OTM5MTI3NjRlMmU3MjAyZTlhMGIxZDBiNCIsIm5iZiI6MTcxNzY0MTU2MS43NTgwMDAxLCJzdWIiOiI2NjYxMjE1OTFmNGRhYWM5NWFmMjkyOTAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.qFhSfFogtM2pWL0dRjKr6iYC0zhx_wU0cKobDm_DpzQ";
+const apiKey = import.meta.env.VITE_API_KEY;
 
 const headers = {
   "Content-Type": "application/json",
