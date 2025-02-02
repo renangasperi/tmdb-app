@@ -9,7 +9,7 @@
 
   <img
     loading="lazy"
-    :class="className"
+    :class="[className, { hidden: isLoading }]"
     :src="src"
     :alt="alt"
     @load="handleLoad"
