@@ -23,7 +23,7 @@
           Data de lançamento: {{ movieDetail.release_date }}
         </p>
 
-        <div class="flex gap-2">
+        <div class="flex flex-wrap gap-2">
           <span
             v-for="genre in movieDetail.genres"
             :key="genre.id"
@@ -37,6 +37,10 @@
       </div>
     </div>
 
+    <div v-if="loadingMovieDetail" class="w-full flex justify-center">
+      <img src="../assets/loader.svg" class="w-14 h-14 animate-spin" />
+    </div>
+
     <ScrollableList v-if="movieCredits">
       <CastCard
         v-for="castMember in movieCredits?.cast"
@@ -44,6 +48,10 @@
         :key="castMember.cast_id"
       />
     </ScrollableList>
+
+    <div v-if="loadingCredits" class="w-full flex justify-center">
+      <img src="../assets/loader.svg" class="w-14 h-14 animate-spin" />
+    </div>
   </div>
 </template>
 
@@ -58,8 +66,12 @@ import ScrollableList from "../components/Home/ScrollableList.vue";
 import CastCard from "../components/MovieDetail/CastCard.vue";
 
 const router = useRouter();
-const { movieDetail, getMovieById } = useMovies();
-const { movieCredits, getMovieCredits } = useMovieCredits();
+const { movieDetail, getMovieById, loading: loadingMovieDetail } = useMovies();
+const {
+  movieCredits,
+  getMovieCredits,
+  loading: loadingCredits,
+} = useMovieCredits();
 
 onMounted(() => {
   const { id: movieId } = router.currentRoute.value.params;

@@ -5,7 +5,10 @@
     <h1 class="text-3xl text-black font-bold self-start">
       {{ titleByMovieType[movieType] }}
     </h1>
-    <div class="w-full flex flex-wrap justify-center gap-5">
+    <div
+      v-if="!!movieData?.results"
+      class="w-full flex flex-wrap justify-center gap-5"
+    >
       <MovieCard
         v-for="movie in movieData?.results"
         :key="movie.id"
@@ -14,6 +17,7 @@
     </div>
 
     <button
+      v-if="!!movieData?.results"
       class="max-w-80 w-full flex justify-center p-2 rounded-lg text-white font-bold bg-blue-600 cursor-pointer hover:bg-blue-700 hover:scale-95 transition-all"
       @click="loadMoreMovies"
     >

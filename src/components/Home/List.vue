@@ -11,7 +11,7 @@
       </button>
     </div>
 
-    <ScrollableList v-if="!!movieData">
+    <ScrollableList v-if="!!movieData && !loading">
       <MovieCard
         v-for="movie in movieData?.results"
         :movie="movie"
@@ -26,7 +26,7 @@
       </div>
     </ScrollableList>
 
-    <ScrollableList v-if="!!loading">
+    <ScrollableList v-if="!!loading && !movieData">
       <div
         class="w-40 h-60 bg-gray-400/60 rounded-xl animate-pulse"
         v-for="n in 10"
