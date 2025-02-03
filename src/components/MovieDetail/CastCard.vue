@@ -16,9 +16,9 @@
     </div>
 
     <p class="mt-3 text-lg font-semibold">{{ castMember?.name }}</p>
-    <p class="mt-1 text-sm text-gray-500 line-clamp-1">
+    <span class="mt-1 text-sm text-gray-500 line-clamspan-1">
       {{ castMember?.character }}
-    </p>
+    </span>
   </div>
 </template>
 

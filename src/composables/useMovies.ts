@@ -21,7 +21,9 @@ export function useMovies() {
       ...response,
       results: response.results.map((movie) => ({
         ...movie,
-        release_date: new Date(movie.release_date).toLocaleDateString("pt-BR"),
+        release_date: new Date(movie.release_date).toLocaleDateString("pt-BR", {
+          timeZone: "UTC",
+        }),
         vote_average: +movie.vote_average.toFixed(1) * 10,
       })),
     };
@@ -34,7 +36,12 @@ export function useMovies() {
 
     movieDetail.value = {
       ...response,
-      release_date: new Date(response.release_date).toLocaleDateString("pt-BR"),
+      release_date: new Date(response.release_date).toLocaleDateString(
+        "pt-BR",
+        {
+          timeZone: "UTC",
+        }
+      ),
       vote_average: +response.vote_average.toFixed(1) * 10,
     };
   };

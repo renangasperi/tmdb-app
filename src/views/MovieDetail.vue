@@ -7,7 +7,7 @@
       v-if="movieDetail"
     >
       <ImageWithLoader
-        className="w-[300px] h-[450px] w-fuoll rounded-xl"
+        className="max-w-[300px] h-[450px] w-full rounded-xl"
         :src="`https://image.tmdb.org/t/p/w300${movieDetail?.poster_path}`"
         :alt="movieDetail?.title"
       />
@@ -58,12 +58,12 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { useMovieCredits } from "../composables/useMovieCredits";
-import { useMovies } from "../composables/useMovies";
 import ImageWithLoader from "../components/common/ImageWithLoader.vue";
 import VoteBadge from "../components/common/VoteBadge.vue";
-import ScrollableList from "../components/Home/ScrollableList.vue";
+import ScrollableList from "../components/common/ScrollableList.vue";
 import CastCard from "../components/MovieDetail/CastCard.vue";
+import { useMovieCredits } from "../composables/useMovieCredits";
+import { useMovies } from "../composables/useMovies";
 
 const router = useRouter();
 const { movieDetail, getMovieById, loading: loadingMovieDetail } = useMovies();

@@ -47,7 +47,7 @@ import { onMounted } from "vue";
 import { useMovies } from "../../composables/useMovies";
 import type { MovieType } from "../../types/movie.interface";
 import MovieCard from "../common/MovieCard.vue";
-import ScrollableList from "./ScrollableList.vue";
+import ScrollableList from "../common/ScrollableList.vue";
 
 const { movieType, title } = defineProps<{
   movieType: MovieType;

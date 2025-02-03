@@ -47,7 +47,7 @@ const { isOpen } = defineProps<{
 
 const emits = defineEmits(["closeSearch"]);
 
-const route = useRouter();
+const router = useRouter();
 const search = ref("");
 const { clearSearchList, searchList, searchMovie, loading } = useSearchMovie();
 const { debouncedValue, updateValue } = useDebounce(search.value);
@@ -62,10 +62,10 @@ const handleClick = (movie: Movie) => {
   emits("closeSearch");
   clearSearchList();
   search.value = "";
-  route.push(`/detail/${movie.id}`);
+  router.push(`/detail/${movie.id}`);
 };
 
-watch(route.currentRoute, () => {
+watch(router?.currentRoute, () => {
   if (!isOpen) return;
 
   emits("closeSearch");
