@@ -7,7 +7,7 @@
       v-if="movieDetail"
     >
       <ImageWithLoader
-        className="max-w-[300px] h-[450px] w-full rounded-xl"
+        className="max-w-[300px] h-[450px] w-full rounded-xl shrink-0"
         :src="`https://image.tmdb.org/t/p/w300${movieDetail?.poster_path}`"
         :alt="movieDetail?.title"
       />

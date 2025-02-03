@@ -51,7 +51,9 @@ describe("ImageWithLoader.vue", () => {
     });
     expect(
       wrapper
-        .find("div.flex.items-center.justify-center.bg-gray-300.w-full")
+        .find(
+          "div.absolute.inset-0.flex.items-center.justify-center.bg-gray-300"
+        )
         .exists()
     ).toBe(true);
   });

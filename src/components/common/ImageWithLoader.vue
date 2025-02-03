@@ -1,19 +1,21 @@
 <template>
-  <div
-    v-if="isLoading"
-    :class="className"
-    class="flex items-center justify-center bg-gray-300 w-full"
-  >
-    <img src="../../assets/loader.svg" class="animate-spin" />
-  </div>
+  <div class="relative overflow-hidden" :class="className">
+    <div
+      v-if="isLoading"
+      class="absolute inset-0 flex items-center justify-center bg-gray-300"
+    >
+      <img src="../../assets/loader.svg" class="animate-spin" />
+    </div>
 
-  <img
-    loading="lazy"
-    :class="className"
-    :src="src"
-    :alt="alt"
-    @load="handleLoad"
-  />
+    <img
+      loading="lazy"
+      class="transition-opacity duration-500"
+      :class="[className, { 'opacity-0': isLoading }]"
+      :src="src"
+      :alt="alt"
+      @load="handleLoad"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
